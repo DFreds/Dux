@@ -1,6 +1,6 @@
-# FluxRedux
+# Dux
 
-This is a sample app to demonstrate the usage of [Flux](https://facebook.github.io/flux/) and [Redux](https://github.com/reactjs/redux) in Android.
+This is a sample app to demonstrate the usage of [Redux](https://github.com/reactjs/redux) in Android.
 
 ## Goals
 
