@@ -1,4 +1,4 @@
-package com.bugfreebastard.fluxredux.network
+package com.bugfreebastard.fluxredux.storage
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Delete

@@ -5,7 +5,6 @@ import android.arch.persistence.room.Database
 import android.arch.persistence.room.Room
 import android.arch.persistence.room.RoomDatabase
 import com.bugfreebastard.fluxredux.models.MovieObject
-import com.bugfreebastard.fluxredux.network.MovieDao
 
 @Database(entities = [(MovieObject::class)], version = 1)
 abstract class MovieDatabase : RoomDatabase() {
