@@ -10,7 +10,7 @@ import retrofit2.http.Path
 
 interface MovieDbApi {
     companion object {
-        const val API_KEY = ""
+        private const val API_KEY = ""
         private const val BASE_URL = "http://api.themoviedb.org/3/"
 
         val api: Retrofit = Retrofit.Builder()
