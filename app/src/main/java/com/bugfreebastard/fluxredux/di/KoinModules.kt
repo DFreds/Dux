@@ -1,7 +1,7 @@
 package com.bugfreebastard.fluxredux.di
 
 import com.bugfreebastard.fluxredux.AppStore
-import com.bugfreebastard.fluxredux.NetworkMiddleware
+import com.bugfreebastard.fluxredux.middlewares.NetworkMiddleware
 import com.bugfreebastard.fluxredux.network.MovieDbApi
 import com.bugfreebastard.fluxredux.storage.MovieDatabase
 import com.bugfreebastard.fluxredux.util.ApplicationSchedulerProvider

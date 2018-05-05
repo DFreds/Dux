@@ -1,4 +1,4 @@
-package com.bugfreebastard.fluxredux
+package com.bugfreebastard.fluxredux.middlewares
 
 import com.bugfreebastard.fluxredux.models.MovieObject
 import com.bugfreebastard.fluxredux.network.MovieDbApi

@@ -1,6 +1,7 @@
 package com.bugfreebastard.fluxredux
 
 import com.bugfreebastard.fluxredux.actions.MovieListActions
+import com.bugfreebastard.fluxredux.middlewares.NetworkMiddleware
 import com.bugfreebastard.fluxredux.redux.Action
 import com.bugfreebastard.fluxredux.states.MovieListState
 import com.bugfreebastard.fluxredux.util.SchedulerProvider
