@@ -3,35 +3,38 @@ package com.bugfreebastard.fluxredux
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import com.bugfreebastard.fluxredux.actions.MovieListActions
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import org.koin.android.ext.android.inject
+import com.bugfreebastard.fluxredux.states.AppState
+import com.bugfreebastard.fluxredux.states.MovieListState
+import tw.geothings.rekotlin.StoreSubscriber
 
-class MainActivity : AppCompatActivity() {
-
-    private val appStore: AppStore by inject()
-    private lateinit var compositeDisposable: CompositeDisposable
+class MainActivity : AppCompatActivity(), StoreSubscriber<MovieListState> {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        compositeDisposable = CompositeDisposable()
-
-        compositeDisposable.add(appStore.state
-                .subscribeBy(
-                        onNext = this::updateUi,
-                        onError = this::handleError,
-                        onComplete = this::handleComplete
-                )
-        )
+        appStore.subscribe(this) {
+            it.select {
+                it.movieListState
+            }.skipRepeats { oldState, newState ->
+                oldState == newState
+            }
+        }
 
         appStore.dispatch(MovieListActions.LoadTopRatedMovies)
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        compositeDisposable.dispose()
+        appStore.unsubscribe(this)
+    }
+
+    override fun newState(state: MovieListState) {
+        if (state.isFetching) {
+            println("show loading")
+        } else {
+            println("don't show loading")
+        }
     }
 
     private fun updateUi(appState: AppState) {
