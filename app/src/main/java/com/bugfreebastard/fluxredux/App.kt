@@ -1,7 +1,10 @@
 package com.bugfreebastard.fluxredux
 
 import android.app.Application
-import com.bugfreebastard.fluxredux.di.*
+import com.bugfreebastard.fluxredux.di.networkModule
+import com.bugfreebastard.fluxredux.di.roomModule
+import com.bugfreebastard.fluxredux.di.schedulerModule
+import com.bugfreebastard.fluxredux.di.storeModule
 import org.koin.android.ext.android.startKoin
 
 class App : Application() {
@@ -11,7 +14,6 @@ class App : Application() {
         startKoin(
                 application = this,
                 modules = listOf(
-                        middlewareModule,
                         storeModule,
                         schedulerModule,
                         networkModule,
