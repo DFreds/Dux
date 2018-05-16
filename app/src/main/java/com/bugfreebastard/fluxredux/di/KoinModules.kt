@@ -3,18 +3,13 @@ package com.bugfreebastard.fluxredux.di
 import com.bugfreebastard.fluxredux.AppStore
 import com.bugfreebastard.fluxredux.network.MovieDbApi
 import com.bugfreebastard.fluxredux.storage.MovieDatabase
-import com.bugfreebastard.fluxredux.util.ApplicationSchedulerProvider
-import com.bugfreebastard.fluxredux.util.SchedulerProvider
+import org.koin.android.architecture.ext.viewModel
 import org.koin.android.ext.koin.androidApplication
 import org.koin.dsl.module.Module
 import org.koin.dsl.module.applicationContext
 
 val storeModule: Module = applicationContext {
-    bean { AppStore(schedulerProvider = get(), movieDbApi = get()) }
-}
-
-val schedulerModule: Module = applicationContext {
-    bean { ApplicationSchedulerProvider() as SchedulerProvider }
+    viewModel { AppStore(movieDbApi = get()) }
 }
 
 val networkModule: Module = applicationContext {

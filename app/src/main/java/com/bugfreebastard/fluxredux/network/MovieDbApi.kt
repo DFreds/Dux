@@ -2,6 +2,7 @@ package com.bugfreebastard.fluxredux.network
 
 import com.bugfreebastard.fluxredux.models.MovieResponse
 import io.reactivex.Flowable
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -21,7 +22,7 @@ interface MovieDbApi {
     }
 
     @GET("movie/top_rated?api_key=${MovieDbApi.API_KEY}")
-    fun getTopRatedMovies(): Flowable<MovieResponse>
+    fun getTopRatedMovies(): Call<MovieResponse>
 
     @GET("discover/movie?api_key=${MovieDbApi.API_KEY}&sort_by=popularity.desc")
     fun discoverMovies(): Flowable<MovieResponse>

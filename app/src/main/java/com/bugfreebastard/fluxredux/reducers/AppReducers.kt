@@ -1,13 +1,14 @@
 package com.bugfreebastard.fluxredux.reducers
 
+import com.bugfreebastard.fluxredux.AppState
 import com.bugfreebastard.fluxredux.actions.MovieListActions
 import com.bugfreebastard.fluxredux.redux.Action
-import com.bugfreebastard.fluxredux.AppState
 import com.bugfreebastard.fluxredux.states.MovieListState
 
-fun appReducer(action: Action, state: AppState): AppState {
-    return state.copy(
-            movieListState = movieListReducer(action, state.movieListState)
+fun appReducer(action: Action, state: AppState?): AppState {
+    val safeState = state ?: AppState()
+    return safeState.copy(
+            movieListState = movieListReducer(action, safeState.movieListState)
     )
 }
 
