@@ -24,7 +24,9 @@ class AppStore(
             is MovieListActions.LoadTopRatedMovies -> {
                 fetchTopRatedMovies(movieDbApi)
                         .subscribeOn(schedulerProvider.io())
-                        .map { dispatch(MovieListActions.InitializeMovieList(it)) }
+                        .map {
+                            dispatch(MovieListActions.InitializeMovieList(it))
+                        }
                         .observeOn(schedulerProvider.ui())
                         .subscribe()
             }

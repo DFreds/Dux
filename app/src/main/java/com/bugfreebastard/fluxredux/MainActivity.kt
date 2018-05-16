@@ -1,48 +1,32 @@
 package com.bugfreebastard.fluxredux
 
 import android.os.Bundle
+import android.support.design.widget.BottomNavigationView
 import android.support.v7.app.AppCompatActivity
-import com.bugfreebastard.fluxredux.actions.MovieListActions
-import io.reactivex.disposables.CompositeDisposable
-import io.reactivex.rxkotlin.subscribeBy
-import org.koin.android.ext.android.inject
+import android.view.MenuItem
+import kotlinx.android.synthetic.main.main_activity.*
 
-class MainActivity : AppCompatActivity() {
-
-    private val appStore: AppStore by inject()
-    private lateinit var compositeDisposable: CompositeDisposable
+class MainActivity : AppCompatActivity(), BottomNavigationView.OnNavigationItemSelectedListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.main_activity)
 
-        compositeDisposable = CompositeDisposable()
-
-        compositeDisposable.add(appStore.state
-                .subscribeBy(
-                        onNext = this::updateUi,
-                        onError = this::handleError,
-                        onComplete = this::handleComplete
-                )
-        )
-
-        appStore.dispatch(MovieListActions.LoadTopRatedMovies)
+        main_bottom_nav.setOnNavigationItemSelectedListener(this)
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        compositeDisposable.dispose()
-    }
+    override fun onNavigationItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.navigation_movies -> {
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.content_container, MovieFragment())
+                        .commitNow()
+            }
+            R.id.navigation_favorites -> {
 
-    private fun updateUi(appState: AppState) {
-        println("new state $appState")
-    }
+            }
+        }
 
-    private fun handleError(throwable: Throwable) {
-        println("error")
-    }
-
-    private fun handleComplete() {
-        println("complete")
+        return true
     }
 }
